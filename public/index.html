@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday! 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<!-- hero section-->
+<section id="hero">
+  <p class="hero-eyebrow">✦ A Special Day For ✦</p>
+  <h1 class="hero-name" id="hero-name">Widya Arie Setyaningrum</h1>
+  <h2 class="hero-title">Happy <em>Birthday</em></h2>
+  <div class="hero-divider"></div>
+  <p class="hero-subtitle">May this day be as beautiful as every smile you've given the world 🌙</p>
+  <div class="scroll-cta" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})">
+    <span>Explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- countdown section -->
+<section id="countdown">
+  <p class="section-label reveal">The Clock</p>
+  <h2 class="section-heading reveal">Time Since <br><em style="font-style:italic;color:var(--rose)">You Were Born</em></h2>
+  <div class="clock-grid reveal" id="clock">
+    <div class="clock-unit">
+      <div class="clock-box"><span class="clock-num" id="c-y">00</span></div>
+      <span class="clock-label">Years</span>
+    </div>
+    <div class="clock-unit">
+      <div class="clock-box"><span class="clock-num" id="c-d">000</span></div>
+      <span class="clock-label">Days</span>
+    </div>
+    <div class="clock-unit">
+      <div class="clock-box"><span class="clock-num" id="c-h">00</span></div>
+      <span class="clock-label">Hours</span>
+    </div>
+    <div class="clock-unit">
+      <div class="clock-box"><span class="clock-num" id="c-m">00</span></div>
+      <span class="clock-label">Minutes</span>
+    </div>
+    <div class="clock-unit">
+      <div class="clock-box"><span class="clock-num" id="c-s">00</span></div>
+      <span class="clock-label">Seconds</span>
+    </div>
+  </div>
+  <p class="birthday-msg" id="bday-msg">🎉 IT'S YOUR BIRTHDAY TODAY! 🎉</p>
+</section>
+
+<!-- wishes (optional)-->
+<section id="wishes">
+  <p class="section-label reveal">With All My Heart</p>
+  <h2 class="section-heading reveal">Birthday <em style="font-style:italic;color:var(--gold)">Wishes</em></h2>
+  <div class="wishes-grid">
+    <div class="wish-card reveal">
+      <span class="wish-icon">🌟</span>
+      <h3 class="wish-title">Longevity</h3>
+      <p class="wish-text">Semoga setiap hari yang kamu jalani dipenuhi dengan makna dan kebahagiaan yang sejati.</p>
+    </div>
+    <div class="wish-card reveal">
+      <span class="wish-icon">💫</span>
+      <h3 class="wish-title">Prosperity</h3>
+      <p class="wish-text">Semoga pintu rezeki selalu terbuka lebar untukmu — bukan hanya harta dan materi,
+        tetapi juga rezeki berupa ketenangan hati, teman-teman tulus, dan cita-cita yang
+        tercapai satu per satu. Semoga segala usahamu berbuah manis. 🌻</p>
+    </div>
+    <div class="wish-card reveal">
+      <span class="wish-icon">🌹</span>
+      <h3 class="wish-title">Health</h3>
+      <p class="wish-text">Kesehatan adalah mahkota yang hanya terlihat oleh mereka yang pernah kehilangannya.
+        Semoga tubuhmu selalu kuat, pikiranmu selalu jernih, dan semangatmu tak pernah padam.
+        Jagalah dirimu baik-baik — karena kamu sangat berharga.</p>
+    </div>
+  </div>
+</section>
+
+<!-- cake or maybe u can just alter it with sum else -->
+<section id="cake-section">
+  <p class="section-label reveal">Make a Wish</p>
+  <h2 class="section-heading reveal">Blow Out the <em style="font-style:italic;color:var(--rose)">Candles</em></h2>
+  <div class="cake-wrap reveal" onclick="blowCandles()">
+    <div class="cake-emoji" id="cake">🎂</div>
+    <p class="cake-hint">Click to blow the candles!</p>
+  </div>
+  <p id="wish-revealed" style="font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);color:var(--gold-light);text-align:center;max-width:500px;opacity:0;transition:opacity 1s ease;margin-top:8px;font-style:italic;"></p>
+</section>
+
+<!-- present spinwheel -->
+<section id="present-section">
+  <p class="section-label reveal">Hadiah Spesial</p>
+  <h2 class="section-heading reveal">Ada <em style="font-style:italic;color:var(--gold)">Hadiah</em> Buat Ibu!</h2>
+  <p class="reveal" style="color:rgba(249,240,216,0.5);font-size:14px;letter-spacing:0.1em;margin-top:-20px">Klik hadiahnya untuk dibuka ✨</p>
+
+  <div class="present-wrap reveal" id="present-wrap" onclick="openPresent()">
+    <div class="present-box" id="present-box">
+      <!-- Lid -->
+      <div class="present-lid" id="present-lid">
+        <div class="ribbon-top-h"></div>
+        <div class="ribbon-top-v"></div>
+        <div class="bow">
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+          <div class="bow-center"></div>
+        </div>
+      </div>
+      <!-- Body -->
+      <div class="present-body">
+        <div class="ribbon-body-h"></div>
+        <div class="ribbon-body-v"></div>
+      </div>
+    </div>
+    <p class="present-hint" id="present-hint">🎁 Klik untuk membuka!</p>
+  </div>
+</section>
+
+<!-- wheel -->
+<div class="wheel-overlay" id="wheel-overlay">
+  <div class="wheel-modal" id="wheel-modal">
+    <button class="wheel-close" onclick="closeWheel()">✕</button>
+    <p class="wheel-eyebrow">🎁 Hadiahmu adalah...</p>
+    <h2 class="wheel-heading">Putar Rodanya!</h2>
+
+    <div class="wheel-stage">
+      <!-- Pointer -->
+      <div class="wheel-pointer">▼</div>
+      <!-- Canvas wheel -->
+      <canvas id="wheelCanvas" width="340" height="340"></canvas>
+    </div>
+
+    <button class="spin-btn" id="spin-btn" onclick="spinWheel()">
+      <span id="spin-btn-text">🎰 PUTAR!</span>
+    </button>
+
+    <!-- Result -->
+    <div class="wheel-result" id="wheel-result">
+      <div class="result-emoji" id="result-emoji"></div>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-sub" id="result-sub"></div>
+      <button class="spin-again-btn" onclick="resetWheel()">🔄 Putar Lagi</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MESSAGE ════ -->
+<section id="message">
+  <p class="section-label reveal">From Me to You</p>
+  <h2 class="section-heading reveal">A Little <em style="font-style:italic;color:var(--rose)">Letter</em></h2>
+  <div class="letter-wrap reveal">
+    <p class="letter-text" id="letter-body">
+      On this special day, I want you to know how truly grateful I am to have you in my life.
+      You bring warmth, laughter, and light into every room you enter.
+      Your kindness is a gift this world doesn't deserve — and yet here you are, giving it freely.
+      <br><br>
+      I hope this birthday feels like the beginning of your best chapter yet.
+      You are so deeply loved. ✨
+    </p>
+    <p class="letter-sig">— With love -💛</p>
+  </div>
+</section>
+
+<!-- emoji (optional just to add more contents) -->
+<section id="gallery">
+  <p class="section-label reveal">Just For Fun</p>
+  <h2 class="section-heading reveal">Celebration <em style="font-style:italic;color:var(--gold)">Vibes</em></h2>
+  <div class="emoji-gallery reveal">
+    <div class="emoji-item">🎉</div>
+    <div class="emoji-item">🥂</div>
+    <div class="emoji-item">🎊</div>
+    <div class="emoji-item">🌸</div>
+    <div class="emoji-item">🎁</div>
+    <div class="emoji-item">🍰</div>
+    <div class="emoji-item">✨</div>
+    <div class="emoji-item">🥳</div>
+    <div class="emoji-item">💎</div>
+    <div class="emoji-item">🌙</div>
+    <div class="emoji-item">🎶</div>
+    <div class="emoji-item">🌹</div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-text">Made with <span class="footer-heart">♥</span> especially for you &nbsp;·&nbsp; Have a magical birthday</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
