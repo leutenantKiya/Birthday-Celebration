@@ -1,8 +1,8 @@
 // ── CONFIG ── Edit these! ──────────────────────────────────────────
   const CONFIG = {
-    name: "Widya Arie Setyaningrum",           // 👈 Change this!
-    birthdate: "1977-03-30",     // 👈 Change this! (YYYY-MM-DD)
-    message: "Untuk Ibu terbaik",               // 👈 Custom letter (null = keep default)
+    name: "Kevin Setiadi Wijaya",           // 👈 Change this!
+    birthdate: "2006-09-21",     // 👈 Change this! (YYYY-MM-DD)
+    message: "A little letter from Purwokerto",               // 👈 Custom letter (null = keep default)
     signature: "— With love 💛", // 👈 Your signature
   };
   // ─────────────────────────────────────────────────────────────────
@@ -370,3 +370,71 @@
       setTimeout(() => el.style.transform = '', 300);
     });
   });
+
+  // ════════════════════════════════════════════════════
+  //  MET ULAH PIN — Komentar (Neon DB via API)
+  // ════════════════════════════════════════════════════
+  const commentList = document.getElementById('comment-list');
+  const commentInput = document.getElementById('comment-input');
+
+  async function loadComments() {
+    try {
+      const res = await fetch('/api/comments');
+      const rows = await res.json();
+      if (rows.length === 0) return;
+      commentList.innerHTML = '';
+      rows.forEach(c => addCommentCard(c.name, c.text, c.time_str));
+    } catch (err) {
+      console.error('loadComments error:', err.message);
+    }
+  }
+
+  function addCommentCard(name, text, time) {
+    const empty = commentList.querySelector('.comment-empty');
+    if (empty) empty.remove();
+    const card = document.createElement('div');
+    card.className = 'comment-card';
+    card.innerHTML = `
+      <div class="comment-author">✦ ${escapeHtml(name)}</div>
+      <div class="comment-text">${escapeHtml(text)}</div>
+      <div class="comment-time">${escapeHtml(time)}</div>
+    `;
+    commentList.appendChild(card);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  async function postComment() {
+    const name = (document.getElementById('hero-name').textContent || 'Guest').trim();
+    const text = commentInput.value.trim();
+    if (!text) return;
+
+    const now = new Date();
+    const timeStr = now.toLocaleDateString('id-ID', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    }) + ' · ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+    try {
+      const res = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, text, time_str: timeStr })
+      });
+      if (!res.ok) throw new Error('Request failed');
+      addCommentCard(name, text, timeStr);
+      commentInput.value = '';
+      commentInput.focus();
+    } catch (err) {
+      console.error('postComment error:', err.message);
+      alert('Gagal mengirim komentar. Coba lagi.');
+    }
+  }
+
+  document.querySelector('.comment-submit').addEventListener('click', postComment);
+  commentInput.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) postComment(); });
+
+  loadComments();

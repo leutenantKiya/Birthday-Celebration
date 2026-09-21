@@ -808,3 +808,112 @@ footer {
     .clock-grid { gap: 12px; }
     .wishes-grid { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════════════════
+    MET ULAH PIN (COMMENT SECTION)
+═════════════════════════════════════════ */
+#ultah-pin {
+    background: linear-gradient(180deg, var(--deep) 0%, #150c10 50%, var(--deep) 100%);
+    gap: 48px;
+}
+
+.comment-wrap {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#comment-input {
+    width: 100%;
+    padding: 18px 22px;
+    border: 1px solid rgba(240,192,64,0.25);
+    border-radius: 16px;
+    background: rgba(13,10,11,0.8);
+    backdrop-filter: blur(8px);
+    color: var(--text-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+#comment-input::placeholder {
+    color: rgba(249,240,216,0.35);
+}
+
+#comment-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(240,192,64,0.12);
+}
+
+.comment-submit {
+    align-self: flex-start;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #0d0a0b;
+    border: none;
+    border-radius: 100px;
+    padding: 14px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(.34,1.56,.64,1), box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(240,192,64,0.35);
+}
+
+.comment-submit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 28px rgba(240,192,64,0.5);
+}
+
+.comment-list {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.comment-empty {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(249,240,216,0.35);
+    font-style: italic;
+    padding: 24px;
+}
+
+.comment-card {
+    border: 1px solid rgba(240,192,64,0.2);
+    border-radius: 16px;
+    padding: 18px 22px;
+    background: rgba(240,192,64,0.04);
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.comment-card .comment-author {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.comment-card .comment-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(249,240,216,0.85);
+    font-weight: 300;
+}
+
+.comment-card .comment-time {
+    font-size: 11px;
+    color: rgba(249,240,216,0.25);
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+}
