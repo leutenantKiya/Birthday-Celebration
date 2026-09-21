@@ -29,11 +29,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fallback to index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 // ── API: GET comments ──────────────────────────────
 app.get('/api/comments', async (req, res) => {
   try {
@@ -63,6 +58,11 @@ app.post('/api/comments', async (req, res) => {
     console.error('POST /api/comments error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
   }
+});
+
+// Fallback to index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
